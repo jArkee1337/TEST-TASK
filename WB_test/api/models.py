@@ -7,7 +7,12 @@ class Post(models.Model):
     title = models.CharField(max_length=250)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author')
 
     class Meta:
         ordering = ['-created_at']
+
+    def __str__(self):
+        return self.title
+
+
