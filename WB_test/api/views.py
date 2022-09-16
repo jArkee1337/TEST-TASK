@@ -12,6 +12,14 @@ class PostAPIList(generics.ListCreateAPIView):
     serializer_class = PostSerializer
     permission_classes = [AllowAny, ]
 
+class PostOtherUsersAPIList(generics.ListCreateAPIView):
+    def get_queryset(self):
+        qs = Post.objects.all().exclude(author=self.request.user.id).order_by('created_at')
+        return qs
+
+    serializer_class = PostSerializer
+    permission_classes = [AllowAny, ]
+
 
 class UserProfileListCreateView(generics.ListAPIView):
     queryset = User.objects.all().annotate(cnt=Count('author')).order_by('-cnt')
