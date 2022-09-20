@@ -7,7 +7,13 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = '__all__'
 
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'password']
+
+class UserSerializerForFollower(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username']

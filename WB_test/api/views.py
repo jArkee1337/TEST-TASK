@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from requests import Response
+
 from .models import *
 from .serializers import *
 from rest_framework import generics
@@ -21,17 +23,12 @@ class PostOtherUsersAPIList(generics.ListCreateAPIView):
     permission_classes = [AllowAny, ]
 
 
-class UserProfileListCreateView(generics.ListAPIView):
+class UserProfileListView(generics.ListAPIView):
     queryset = User.objects.all().annotate(cnt=Count('author')).order_by('-cnt')
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
 
-    def perform_create(self, serializer):
-        user = self.request.user
-        serializer.save(user=user)
 
 
-class userProfileDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [AllowAny]
+
+
