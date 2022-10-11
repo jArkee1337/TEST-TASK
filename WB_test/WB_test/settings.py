@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'follower.apps.FollowerConfig',
     'rest_framework',
-    'rest_framework.authtoken',
-    'drf_registration',
+
+
 
 ]
 
@@ -136,7 +136,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
 
     ),
 }
@@ -146,3 +147,5 @@ REST_FRAMEWORK = {
 AUTHENTICATION_BACKENDS = [
     'drf_registration.auth.MultiFieldsModelBackend',
 ]
+
+LOGIN_REDIRECT_URL = '/api/v1/'

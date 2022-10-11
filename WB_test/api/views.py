@@ -12,19 +12,22 @@ from django.db.models import Count
 class PostAPIList(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [AllowAny, ]
+    permission_classes = [IsAuthenticatedOrReadOnly, ]
 
-class PostOtherUsersAPIList(generics.ListCreateAPIView):
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+class PostOtherUsersAPIList(generics.ListAPIView):
     def get_queryset(self):
         qs = Post.objects.all().exclude(author=self.request.user.id).order_by('created_at')
         return qs
 
     serializer_class = PostSerializer
-    permission_classes = [AllowAny, ]
+    permission_classes = [IsAuthenticated, ]
 
 
 class UserProfileListView(generics.ListAPIView):
-    queryset = User.objects.all().annotate(cnt=Count('author')).order_by('-cnt')
+    queryset = User.objects.all().annotate(cnt=Count('posts')).order_by('-cnt', '-pk')
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
 
