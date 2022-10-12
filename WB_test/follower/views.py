@@ -5,7 +5,7 @@ from .serializers import ListFollowerSerializer
 from django.contrib.auth.models import User
 
 
-class ListFollowerView(generics.ListAPIView):
+class ListCreateFollowerView(generics.ListCreateAPIView):
     """ The list of user's subscribers
     """
     permission_classes = [permissions.IsAuthenticated]
@@ -15,22 +15,16 @@ class ListFollowerView(generics.ListAPIView):
         return Follower.objects.filter(user=self.request.user)
 
 
-class FollowerView(views.APIView):
-    """ Adding to subscribers
+
+class DeleteFollowerView(views.APIView):
+    """ Delete from subscribers
     """
     permission_classes = [permissions.IsAuthenticated]
-
-    def post(self, request, pk):
-        try:
-            user = User.objects.get(id=pk)
-        except User.DoesNotExist:
-            return response.Response(status=404)
-        Follower.objects.create(subscriber=request.user, user=user)
-        return response.Response(status=201)
 
     def delete(self, request, pk):
         try:
             sub = Follower.objects.get(subscriber=request.user, user_id=pk)
+            print(sub.user_id)
 
         except User.DoesNotExist:
             return response.Response(status=404)

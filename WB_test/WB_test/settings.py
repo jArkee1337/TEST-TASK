@@ -148,4 +148,4 @@ AUTHENTICATION_BACKENDS = [
     'drf_registration.auth.MultiFieldsModelBackend',
 ]
 
-LOGIN_REDIRECT_URL = '/api/v1/'
+LOGIN_REDIRECT_URL = '/api/v1/posts/'

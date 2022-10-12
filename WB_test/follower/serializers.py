@@ -1,10 +1,21 @@
 from rest_framework import serializers
-from api.serializers import UserSerializerForFollower
+# from api.serializers import UserSerializerForFollower
 from .models import Follower
+from django.contrib.auth.models import User
 
+
+# class UserByFollowerSerializer(serializers.ModelSerializer):
+#     subscribers = serializers.PrimaryKeyRelatedField(many=True, queryset=Follower.objects.all())
+#
+#     class Meta:
+#         model = User
+#         fields = ('id', 'username', 'subscribers',)
 class ListFollowerSerializer(serializers.ModelSerializer):
-    subscriber = UserSerializerForFollower(many=True, read_only=True)
+
 
     class Meta:
         model = Follower
-        fields = ('subscriber',)
+        fields = ['user', 'subscriber']
+
+
+

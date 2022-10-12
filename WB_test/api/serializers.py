@@ -11,14 +11,14 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    posts = serializers.PrimaryKeyRelatedField(many=True, queryset=Post.objects.all())
+    posts = serializers.SlugRelatedField(many=True, read_only=True, slug_field='title')
     class Meta:
         model = User
         fields = ['id', 'username', 'password', 'posts']
 
-class UserSerializerForFollower(serializers.ModelSerializer):
-    """Serialization for followers
-    """
-    class Meta:
-        model = User
-        fields = ['id', 'username']
+# class UserSerializerForFollower(serializers.ModelSerializer):
+#     """Serialization for followers
+#     """
+#     class Meta:
+#         model = User
+#         fields = ['id', 'username']
