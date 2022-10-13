@@ -4,7 +4,7 @@ from .views import *
 
 
 urlpatterns = [
-    path('', ListCreateFollowerView.as_view()),
+    path('', ListFollowerView.as_view()),
 
     path('<int:pk>', DeleteFollowerView.as_view()),
 

@@ -16,9 +16,3 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'password', 'posts']
 
-# class UserSerializerForFollower(serializers.ModelSerializer):
-#     """Serialization for followers
-#     """
-#     class Meta:
-#         model = User
-#         fields = ['id', 'username']

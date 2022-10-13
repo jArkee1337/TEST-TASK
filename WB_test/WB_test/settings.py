@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'api.apps.ApiConfig',
     'follower.apps.FollowerConfig',
+    'feed.apps.FeedConfig',
     'rest_framework',
-
+    'rest_framework.authtoken',
+    'djoser',
 
 
 ]
@@ -135,13 +137,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+    ],
 
-    ),
 }
-
 # AUTH_USER_MODEL = 'api.User'
 
 AUTHENTICATION_BACKENDS = [
