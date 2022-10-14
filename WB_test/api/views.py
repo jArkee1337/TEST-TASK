@@ -28,7 +28,7 @@ class PostOtherUsersAPIList(generics.ListAPIView):
 
 class UserProfileListView(generics.ListAPIView):
     queryset = User.objects.all().annotate(cnt=Count('posts')).order_by('-cnt', '-pk')
-    serializer_class = UserSerializer
+    serializer_class = MyUserSerializer
     permission_classes = [AllowAny]
 
 

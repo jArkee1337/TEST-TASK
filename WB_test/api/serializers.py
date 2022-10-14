@@ -10,7 +10,7 @@ class PostSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UserSerializer(serializers.ModelSerializer):
+class MyUserSerializer(serializers.ModelSerializer):
     posts = serializers.SlugRelatedField(many=True, read_only=True, slug_field='title')
     class Meta:
         model = User
