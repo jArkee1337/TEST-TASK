@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions, views, response
 from .models import Follower
-from .serializers import ListFollowerSerializer
+from .serializers import ListFollowerSerializer, ListByFollowerSerializer
 from django.contrib.auth.models import User
 
 
@@ -9,7 +9,7 @@ class ListFollowerView(generics.ListAPIView):
     """ The list of user's subscribers
     """
     permission_classes = [permissions.IsAuthenticated]
-    serializer_class = ListFollowerSerializer
+    serializer_class = ListByFollowerSerializer
 
     def get_queryset(self):
         return Follower.objects.filter(user=self.request.user)

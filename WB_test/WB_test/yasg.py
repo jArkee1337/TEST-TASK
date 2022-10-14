@@ -9,7 +9,7 @@ schema_view = get_schema_view(
       title="Test_api",
       default_version='v1',
       description="Test description",
-      
+
    ),
    public=True,
    permission_classes=(permissions.AllowAny,),
