@@ -4,8 +4,8 @@ from .views import UserProfileListView
 
 
 urlpatterns = [
-    path('posts/', PostAPIList.as_view()),
-    path("all-profiles/",UserProfileListView.as_view()),
-    path("other-posts/",PostOtherUsersAPIList.as_view()),
+    path('post/', CreatePostAPIView.as_view(), name='create_post'),
+    path("all-users/",UserProfileListView.as_view(), name='profiles'),
+    path("other-users-posts/",PostOtherUsersAPIList.as_view(), name='other-users-posts'),
 
 ]

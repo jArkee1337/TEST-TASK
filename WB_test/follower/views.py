@@ -17,11 +17,13 @@ class ListFollowerView(generics.ListAPIView):
 
 
 class DeleteFollowerView(views.APIView):
-    """ Delete from subscribers
-    """
+
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, pk):
+        """
+        Add to followers
+        """
         try:
             user = User.objects.get(id=pk)
         except Follower.DoesNotExist:
