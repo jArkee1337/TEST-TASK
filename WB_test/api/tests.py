@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 
 
-class PostlistTests(APITestCase):
+class PostListTests(APITestCase):
     def setUp(self):
         self.first_user = User.objects.create_user(username='oleg_1', password='oleg')
         self.second_user = User.objects.create_user(username='oleg_2', password='oleg')
@@ -43,7 +43,7 @@ class PostlistTests(APITestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_others_users_posts(self):
+    def test_others_users_posts_auth(self):
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.first_user_token.key)
         url = reverse('other-users-posts')
         data = Post.objects.all().exclude(author=self.first_user).order_by('created_at')
