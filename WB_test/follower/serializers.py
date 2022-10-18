@@ -1,5 +1,4 @@
 from rest_framework import serializers
-# from api.serializers import UserSerializerForFollower
 from .models import Follower
 from django.contrib.auth.models import User
 
@@ -17,8 +16,3 @@ class ListByFollowerSerializer(serializers.ModelSerializer):
         model = Follower
         fields = ('subscriber',)
 
-
-class ListFollowerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Follower
-        fields = ['user', 'subscriber']

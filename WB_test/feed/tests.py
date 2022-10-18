@@ -31,11 +31,9 @@ class FeedTests(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.first_user_token.key)
         response = self.client.get(url)
         data_1 = Post.objects.filter(author__owner__subscriber=self.first_user).order_by('-created_at').select_related(
-            'author').get(pk=1)
+            'author').get(pk=Post.objects.get(title=self.first_post.title).id)
         data_2 = Post.objects.filter(author__owner__subscriber=self.first_user).order_by('-created_at').select_related(
-            'author').get(pk=2)
+            'author').get(pk=Post.objects.get(title=self.second_post.title).id)
         serializer_data = PostSerializer([data_2, data_1], many=True).data
-        print(serializer_data)
-        print(response.data['results'])
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['results'], serializer_data)
